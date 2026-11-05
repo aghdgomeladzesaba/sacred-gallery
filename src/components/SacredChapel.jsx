@@ -269,7 +269,7 @@ export default function SacredChapel() {
         {isLit && (
           <div
             className="candle-flame absolute -top-9 left-1/2
-              h-9 w-5 -translate-x-1/2 rounded-full
+              h-9 w-5 rounded-full
               bg-amber-300 blur-[1px]
               shadow-[0_0_30px_10px_rgba(245,180,50,0.6)]"
           />
