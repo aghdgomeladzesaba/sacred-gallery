@@ -1,7 +1,6 @@
 
 import { useState } from 'react'
 
-// Our six Orthodox icons
 const icons = [
   {
     id: 'christ',
@@ -72,7 +71,6 @@ export default function SacredChapel() {
 
   const chapelImage = '/images/chapel/chapel-interior.jpeg'
 
-  // Open the curtains for a selected icon
   function revealIcon(id) {
     setRevealed(previous => ({
       ...previous,
@@ -80,7 +78,6 @@ export default function SacredChapel() {
     }))
   }
 
-  // Switch between the description and prayer
   function togglePrayer(id) {
     setPrayerViews(previous => ({
       ...previous,
@@ -94,7 +91,6 @@ export default function SacredChapel() {
       aria-labelledby="chapel-title"
     >
 
-      {/* Chapel animations */}
       <style>{`
         @keyframes chapelFogLift {
           0% {
@@ -132,12 +128,13 @@ export default function SacredChapel() {
           }
         }
 
+        /* Only scale the flame, never move it sideways */
         @keyframes candleFlicker {
           0%, 100% {
-            transform: translateX(-50%) scale(1);
+            transform: scale(1);
           }
           50% {
-            transform: translateX(-50%) scale(1.12, 0.93);
+            transform: scale(1.12, 0.93);
           }
         }
 
@@ -165,6 +162,7 @@ export default function SacredChapel() {
         }
 
         .candle-flame {
+          transform-origin: center bottom;
           animation: candleFlicker 1.5s ease-in-out infinite;
         }
 
@@ -266,20 +264,28 @@ export default function SacredChapel() {
       {/* Interactive candle */}
       <div className="relative mx-auto mt-16 h-28 w-12">
 
+        {/* The outer wrapper stays centered permanently */}
         {isLit && (
           <div
-            className="candle-flame absolute -top-9 left-1/2
-              h-9 w-5 rounded-full
-              bg-amber-300 blur-[1px]
-              shadow-[0_0_30px_10px_rgba(245,180,50,0.6)]"
-          />
+            className="pointer-events-none absolute -top-9 left-1/2 h-9 w-5"
+            style={{ transform: 'translateX(-50%)' }}
+          >
+            {/* Only the inner flame flickers */}
+            <div
+              className="candle-flame h-full w-full rounded-full
+                bg-amber-300 blur-[1px]
+                shadow-[0_0_30px_10px_rgba(245,180,50,0.6)]"
+            />
+          </div>
         )}
 
+        {/* Wick */}
         <div
           className="absolute left-1/2 top-0 h-4 w-1
             -translate-x-1/2 bg-stone-700"
         />
 
+        {/* Candle body */}
         <div
           className="absolute bottom-0 h-24 w-12
             rounded-t-md bg-gradient-to-b
@@ -288,7 +294,7 @@ export default function SacredChapel() {
 
       </div>
 
-      {/* Candle interaction */}
+      {/* Light the candle */}
       {!isLit ? (
         <button
           type="button"
@@ -308,10 +314,9 @@ export default function SacredChapel() {
         </p>
       )}
 
-      {/* Chapel opens after candle is lit */}
+      {/* Chapel appears after candle is lit */}
       {isLit && (
         <>
-          {/* Church interior */}
           <div
             className="chapel-entrance relative mx-auto mt-16
               max-w-5xl overflow-hidden
@@ -370,7 +375,7 @@ export default function SacredChapel() {
 
           </div>
 
-          {/* Wall of sacred icons */}
+          {/* The six sacred icons */}
           <div className="mx-auto mt-24 max-w-6xl">
 
             <p className="text-xs uppercase tracking-[.3em] text-[#C9A15B]">
@@ -390,7 +395,6 @@ export default function SacredChapel() {
               learn its story, and enter a moment of prayer.
             </p>
 
-            {/* Six interactive icon cards */}
             <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
 
               {icons.map(icon => {
@@ -405,7 +409,7 @@ export default function SacredChapel() {
                       shadow-[0_15px_50px_rgba(0,0,0,0.4)]"
                   >
 
-                    {/* Gold-framed icon */}
+                    {/* Gold framed icon */}
                     <div
                       className="relative aspect-[3/4]
                         overflow-hidden border-2
@@ -452,7 +456,6 @@ export default function SacredChapel() {
                             focus-visible:outline-offset-[-5px]
                             focus-visible:outline-[#F1D28C]"
                         >
-
                           <span
                             className="border border-[#C9A15B]/60
                               bg-[#0B0B0E]/90
@@ -461,13 +464,12 @@ export default function SacredChapel() {
                           >
                             ✧ Unveil the Icon
                           </span>
-
                         </button>
                       )}
 
                     </div>
 
-                    {/* Icon name and subtitle */}
+                    {/* Icon information */}
                     <h4 className="mt-7 font-serif text-2xl text-[#C9A15B]">
                       {icon.name}
                     </h4>
@@ -479,13 +481,12 @@ export default function SacredChapel() {
                       {icon.subtitle}
                     </p>
 
-                    {/* Information appears after unveiling */}
                     {isRevealed ? (
                       <div
                         className="mt-6 border-t border-[#C9A15B]/25 pt-6"
                       >
 
-                        {/* Changing information panel */}
+                        {/* Description or prayer */}
                         <div aria-live="polite" aria-atomic="true">
 
                           <p
@@ -517,7 +518,7 @@ export default function SacredChapel() {
                             bg-[#C9A15B]/50"
                         />
 
-                        {/* Description / prayer toggle */}
+                        {/* Prayer toggle button */}
                         <button
                           type="button"
                           onClick={() => togglePrayer(icon.id)}
@@ -556,7 +557,7 @@ export default function SacredChapel() {
 
             </div>
 
-            {/* Closing words */}
+            {/* Chapel closing message */}
             <div className="mx-auto mt-20 max-w-xl">
 
               <div className="mx-auto h-px w-20 bg-[#C9A15B]/50" />
