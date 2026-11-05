@@ -1,5 +1,6 @@
 import Gallery from '../components/Gallery'
 import { Link } from 'react-router'
+import SacredChapel from '../components/SacredChapel'
 
 export default function Home() {
   return (
@@ -147,6 +148,8 @@ export default function Home() {
       </section>
 
       <Gallery />
+
+      <SacredChapel />
 
       {/* Closing statement */}
       <section className="border-t border-[#C9A15B]/20 bg-[#131216] px-6 py-20 text-center">
