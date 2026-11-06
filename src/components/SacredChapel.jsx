@@ -128,7 +128,7 @@ export default function SacredChapel() {
           }
         }
 
-        /* Only scale the flame, never move it sideways */
+        /* Flicker without horizontal movement */
         @keyframes candleFlicker {
           0%, 100% {
             transform: scale(1);
@@ -261,35 +261,36 @@ export default function SacredChapel() {
 
       </div>
 
-      {/* Interactive candle */}
+      {/* Interactive candle with Flexbox alignment */}
       <div className="relative mx-auto mt-16 h-28 w-12">
 
-        {/* The outer wrapper stays centered permanently */}
+        {/* Flame container is always centered */}
         {isLit && (
           <div
-            className="pointer-events-none absolute -top-9 left-1/2 h-9 w-5"
-            style={{ transform: 'translateX(-50%)' }}
+            className="pointer-events-none absolute inset-x-0
+              -top-9 flex justify-center"
           >
-            {/* Only the inner flame flickers */}
             <div
-              className="candle-flame h-full w-full rounded-full
+              className="candle-flame h-9 w-5 rounded-full
                 bg-amber-300 blur-[1px]
                 shadow-[0_0_30px_10px_rgba(245,180,50,0.6)]"
             />
           </div>
         )}
 
-        {/* Wick */}
+        {/* Wick also uses Flexbox centering */}
         <div
-          className="absolute left-1/2 top-0 h-4 w-1
-            -translate-x-1/2 bg-stone-700"
-        />
+          className="absolute inset-x-0 top-0
+            flex justify-center"
+        >
+          <div className="h-4 w-1 bg-stone-700" />
+        </div>
 
         {/* Candle body */}
         <div
-          className="absolute bottom-0 h-24 w-12
-            rounded-t-md bg-gradient-to-b
-            from-[#F1E0B7] to-[#A98553]"
+          className="absolute bottom-0 left-0
+            h-24 w-full rounded-t-md
+            bg-gradient-to-b from-[#F1E0B7] to-[#A98553]"
         />
 
       </div>
@@ -375,7 +376,7 @@ export default function SacredChapel() {
 
           </div>
 
-          {/* The six sacred icons */}
+          {/* Six sacred icons */}
           <div className="mx-auto mt-24 max-w-6xl">
 
             <p className="text-xs uppercase tracking-[.3em] text-[#C9A15B]">
@@ -409,7 +410,7 @@ export default function SacredChapel() {
                       shadow-[0_15px_50px_rgba(0,0,0,0.4)]"
                   >
 
-                    {/* Gold framed icon */}
+                    {/* Framed icon */}
                     <div
                       className="relative aspect-[3/4]
                         overflow-hidden border-2
@@ -518,7 +519,7 @@ export default function SacredChapel() {
                             bg-[#C9A15B]/50"
                         />
 
-                        {/* Prayer toggle button */}
+                        {/* Prayer toggle */}
                         <button
                           type="button"
                           onClick={() => togglePrayer(icon.id)}
@@ -557,7 +558,7 @@ export default function SacredChapel() {
 
             </div>
 
-            {/* Chapel closing message */}
+            {/* Closing message */}
             <div className="mx-auto mt-20 max-w-xl">
 
               <div className="mx-auto h-px w-20 bg-[#C9A15B]/50" />
